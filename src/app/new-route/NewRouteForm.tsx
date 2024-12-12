@@ -11,7 +11,6 @@ const NewRouteForm = ({ children }: { children: ReactNode }) => {
     } | null,
     FormData
   >(createRouteAction, null);
-  console.log(state);
   return (
     <form action={formAction}>
       {state?.error && (

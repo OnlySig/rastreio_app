@@ -1,3 +1,4 @@
+import MapNewRoute from "./MapNewRoute";
 import NewRouteForm from "./NewRouteForm";
 
 export const searchDirections = async (source: string, destination: string) => {
@@ -30,9 +31,9 @@ const NewRoute = async ({
   const { destination, source } = await searchParams;
   const result =
     destination && source ? await searchDirections(source, destination) : null;
-  let directionsData;
-  let placeSourceId;
-  let placeDestinationId;
+  let directionsData = null;
+  let placeSourceId = null;
+  let placeDestinationId = null;
   if (result) {
     directionsData = result.directionsData;
     placeSourceId = result.placeSourceId;
@@ -125,6 +126,7 @@ const NewRoute = async ({
           </NewRouteForm>
         </div>
       </div>
+      <MapNewRoute directionsData={directionsData} />
     </div>
   );
 };

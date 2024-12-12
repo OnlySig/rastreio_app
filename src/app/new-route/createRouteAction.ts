@@ -1,4 +1,7 @@
 "use server";
+
+import { revalidateTag } from "next/cache";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createRouteAction = async (state: any, formData: FormData) => {
   const { sourceId, destinationId } = Object.fromEntries(formData);
@@ -28,10 +31,9 @@ export const createRouteAction = async (state: any, formData: FormData) => {
       ),
     }),
   });
-  console.log(newRoute);
   if (!newRoute.ok) {
     return { error: "Failed to create route" };
   }
-
+  revalidateTag("routes");
   return { success: true };
 };
